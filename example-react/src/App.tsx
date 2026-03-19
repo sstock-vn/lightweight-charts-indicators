@@ -1,16 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import type { Bar } from 'oakscriptjs';
 import { loadCSV } from './data-loader';
-import { ChartManager } from './chart';
-import ChartContainer from './components/ChartContainer';
-import IndicatorPanel from './components/IndicatorPanel';
+import IchimokuChart from './components/IchimokuChart';
 import './App.css';
 
 export default function App() {
   const [bars, setBars] = useState<Bar[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [chartManager, setChartManager] = useState<ChartManager | null>(null);
 
   useEffect(() => {
     loadCSV('./data/SPX.csv')
@@ -26,15 +23,11 @@ export default function App() {
       });
   }, []);
 
-  const handleChartReady = useCallback((manager: ChartManager) => {
-    setChartManager(manager);
-  }, []);
-
   return (
     <>
       <header>
-        <h1>lightweight-charts-indicators Demo (React)</h1>
-        <p>Technical indicators using LightweightCharts v5</p>
+        <h1>Ichimoku Cloud Demo</h1>
+        <p>SPX with Ichimoku Cloud overlay using lightweight-charts-react-components</p>
       </header>
       <div className="main-container">
         {loading ? (
@@ -42,10 +35,7 @@ export default function App() {
         ) : error ? (
           <div className="error">Failed to load data: {error}</div>
         ) : (
-          <>
-            <ChartContainer bars={bars} onChartReady={handleChartReady} />
-            <IndicatorPanel bars={bars} chartManager={chartManager} />
-          </>
+          <IchimokuChart bars={bars} />
         )}
       </div>
     </>

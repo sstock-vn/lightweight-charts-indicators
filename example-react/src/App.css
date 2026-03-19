@@ -16,6 +16,31 @@ header p {
   margin-top: 4px;
 }
 
+/* Navigation */
+.nav-link {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #787b86;
+  background-color: #2a2e39;
+  border: 1px solid #363a45;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.nav-link:hover {
+  color: #d1d4dc;
+  border-color: #4b5563;
+}
+
+.nav-link.active {
+  color: #f0f3fa;
+  background-color: rgba(41, 98, 255, 0.15);
+  border-color: #2962FF;
+}
+
 .main-container {
   display: flex;
   flex: 1;
